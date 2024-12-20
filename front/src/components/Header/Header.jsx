@@ -4,8 +4,8 @@ import classes from "./style.module.css";
 import logo from "../../img/argentBankLogo.png";
 
 export default function Header() {
-  const authenticated = useSelector((state) => state.authenticated);// Utilisateur de redux pour avoir accès aux donnée
-  const user = useSelector((state) => state.user); 
+  const authenticated = useSelector((state) => state.authenticated); // Utilisateur de redux pour avoir accès aux donnée
+  const user = useSelector((state) => state.user);
 
   return (
     <header>
@@ -21,15 +21,12 @@ export default function Header() {
         <div>
           {authenticated ? (
             <div className={classes.profile}>
-              <img
-                src="#"
-                alt="Profile"
-                className={classes.profilePicture}
-              />
               <span className={classes.profileName}>
+                <i className="fa fa-user-circle"></i>
                 {user?.lastName || "User"}
               </span>
               <a className={classes.logoutButton} href="/index">
+                <i class="fa fa-sign-out"></i>
                 Logout
               </a>
             </div>

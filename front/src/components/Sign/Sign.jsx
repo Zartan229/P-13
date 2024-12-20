@@ -37,7 +37,7 @@ export default function Sign() {
 
   return (
     <body>
-      <main className={`${classes.main} ${classes.bgDark}`}>
+      <main className={classes.bgDark}>
         <section className={classes.signInContent}>
           <i className={`fa fa-user-circle ${classes.signInIcon}`}></i>
           <h1>Sign In</h1>

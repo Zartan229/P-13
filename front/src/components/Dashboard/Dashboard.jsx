@@ -96,26 +96,26 @@ export default function Dashboard() {
         <h1>
           Welcome back<br />
           {edit ? (
-            <>
+            <div class="inputDiv"> 
               <input
                 type="text"
                 placeholder={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
-                className={classes.input}
+                className={`${classes.input} ${classes.inputEntryTwo}`}
               />
               <input
                 type="text"
                 placeholder={lastName}
                 onChange={(e) => setLastName(e.target.value)}
-                className={classes.input}
+                className={`${classes.input} ${classes.inputEntryOne}`}
               />
-            </>
+            </div>
           ) : (
             `${profile.firstName} ${profile.lastName}`
           )}
         </h1>
         {edit ? (
-          <div>
+          <div className={classes.buttonFlex}>
             <button className={classes.saveButton} onClick={handleSave}>
               Save
             </button>

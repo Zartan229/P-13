@@ -49,3 +49,7 @@
   padding: 5px;
   font-size: 1.2rem;
 }
+.bgDark {
+  background-color: #12002b;
+  height: 84vh;
+}

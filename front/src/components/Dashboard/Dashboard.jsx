@@ -96,7 +96,7 @@ export default function Dashboard() {
         <h1>
           Welcome back<br />
           {edit ? (
-            <div class="inputDiv"> 
+            <div className="inputDiv"> 
               <input
                 type="text"
                 placeholder={firstName}

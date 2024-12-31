@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import classes from "./style.module.css";
 import logo from "../../img/argentBankLogo.png";
+import out from "../../img/out.png";
 
 export default function Header() {
   const authenticated = useSelector((state) => state.authenticated); // Utilisateur de redux pour avoir accès aux donnée
@@ -26,7 +27,7 @@ export default function Header() {
                 {user?.lastName || "User"}
               </span>
               <a className={classes.logoutButton} href="/index">
-                <i class="fa fa-sign-out"></i>
+                <img className={classes.imhIcon} src={out}/>
                 Logout
               </a>
             </div>

@@ -36,7 +36,6 @@ export default function Sign() {
   };
 
   return (
-    <body>
       <main className={classes.bgDark}>
         <section className={classes.signInContent}>
           <i className={`fa fa-user-circle ${classes.signInIcon}`}></i>
@@ -71,6 +70,5 @@ export default function Sign() {
           </form>
         </section>
       </main>
-    </body>
   );
 }

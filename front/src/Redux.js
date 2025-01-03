@@ -1,39 +1,49 @@
-const data = {
+import { createReducer } from '@reduxjs/toolkit';
+import { handleLogin, fetchUserProfile, updateUserProfile } from "./Utility"
+const data  = {
   token: null, // JWT
-  authenticated: false, // SECURITER
-  user: null, // Donnée utilisateur(rajouter pour avoir accès aux donnée sur tout le site)
+  authenticated: false, // bool vrai faux
+  user: null, 
+  error: null, // error ajouter car souhaitable dans un redux
 };
 
-export const Redux = (state = data, action) => {
-  switch (action.type) {
-    case "LOGIN_SUCCESS":
-      return {
-        ...state,
-        token: action.payload.token,
-        authenticated: true, // Utilisateeur authentifier
-      };
-    case "SET_PROFILE":
-      return {
-        ...state,
-        user: action.payload, // Ajoute l'utilisateur dans le store
-      };
-    case "LOGOUT":
-      return {
-        ...state,
-        token: null, // Nul pour déconnexion
-        authenticated: false,
-        user: null, // Nul car déconnexion
-      };
-    default:
-      return state;
-  }
-};
-
-
-
-export const setProfile = (profile) => ({
-  type: "SET_PROFILE",
-  payload: profile,
+export const Redux = createReducer(data , (builder) => {
+  builder
+    // fulfilled donc succès dans le hangleLogin
+    .addCase(handleLogin.fulfilled, (state, action) => {
+      state.token = action.payload;  //On récupère le token
+      state.authenticated = true; //Bool vrai pour ProtectedRoute
+      state.error = null;  // Pas d'erreur
+    })
+    // rejected donc echouer
+    .addCase(handleLogin.rejected, (state, action) => {
+      state.error = action.payload;  // Message d'erreur
+      state.authenticated = false; // Bool faux pour protected route
+    })
+    .addCase(fetchUserProfile.fulfilled, (state, action) => {
+      state.user = action.payload; // on récupère l'utilisateur
+      state.error = null;
+    })
+    .addCase(fetchUserProfile.rejected, (state, action) => {
+      state.error = action.payload; // Message d'erreur
+    })
+    .addCase(updateUserProfile.fulfilled, (state, action) => {
+      state.user = action.payload; // Màj de user
+      state.error = null;
+    })
+    .addCase(updateUserProfile.rejected, (state, action) => {
+      state.error = action.payload;
+    })
+    .addCase('LOGOUT', (state) => {
+      state.token = null;
+      state.authenticated = false; // On vide tout
+      state.user = null;
+      state.error = null;
+    })
 });
 
+export default Redux;
 
+export const logout = () => ({
+  type: "LOGOUT",
+});
